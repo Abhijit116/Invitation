@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invited</title>
+    <style>
+        * { 
+          margin:0;
+          padding:0;
+          box-sizing:border-box; 
+          
+        }
+        body { 
+          background-color:black;
+          }
+        .bdr { 
+          height:600px; 
+          width:380px; 
+          background-color:black; 
+          margin:0 auto; 
+          position:relative; 
+          margin-top:10%; 
+          border-radius:20px; 
+          text-align:center; 
+          padding-top:20px; 
+          color:white; 
+          font-weight:600; 
+          font-size:18px;
+          font-family: Georgia, 'Times New Roman', Times, serif;
+          }
+        @property --angle {
+          syntax:"<angle>"; 
+          initial-value:0deg; 
+          inherits:false; 
+          
+        }
+        .bdr::after, .bdr::before {
+            content:""; 
+            position:absolute; 
+            height:100%; 
+            width:100%; 
+            top:50%; 
+            left:50%; 
+            translate :-50% -50%; 
+            background-image:conic-gradient(from var(--angle), red, yellow, green, red); 
+            z-index:-1; 
+            padding:5px; 
+            border-radius:25px; 
+            animation:3s spin linear infinite;
+        }
+        .bdr::before { 
+          filter:blur(1rem); 
+          opacity:.8; 
+          
+        }
+        @keyframes spin { 
+          from 
+          { --angle:0deg; 
+            
+          } 
+          to 
+          { 
+            --angle: 360deg; 
+            
+          } 
+          
+        }
+        h3, p, ul{
+          text-align:left; 
+          padding-left:20px;
+          padding-top:10px;
+          list-style: none;
+          text-justify: left;
+          
+        }
+        .footer{
+          color:white;
+          text-align:center ;
+          font-size: 13px;
+          opacity:0.5;
+     
+        }
+       </style>
+</head>
+<body>
+    <div class="bdr">
+        <div id="displayImage" class="img"></div>
+        <div id="displayName" class="name"></div>
+        <div class="footer">©ABHIJIT 2024</div>
+    </div>
+    
+    <script>
+        // Retrieve data from localStorage
+        const name = localStorage.getItem('name');
+        const imageUrl = localStorage.getItem('image');
+
+        // Display the name
+        if (name) {
+            document.getElementById('displayName').innerHTML = `<h3 style="">
+            Dear <span style ="color:cyan;"> ${name},</span></h3><br><p>You're invited to the special event in honour of <span style="font-family:cursive;font-weight:600;font-size:30px;color:yellow">Teacher's Day.</span><br><br><ul><li>Date :- September 9, 2024.</li><br><li>Time :- 04:00 PM</li><br><li>Venue :- Kousik Sir's house.</li></ul><br><br>Looking forward to seeing you.<br><br> Let's give a small tribute to our all the educators.</p>`;
+        }
+
+        // Display the image
+        if (imageUrl) {
+            document.getElementById('displayImage').innerHTML = `
+                <div class="img">
+                    <img src="${imageUrl}" alt="Uploaded Image" style="height: 150px; width: 150px; border-radius: 50%; object-fit: cover;box-shadow:0 0 30px ;">
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

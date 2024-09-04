@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Form</title>
+    <style>
+        * { 
+          margin:0; padding:0;
+        box-sizing:border-box;
+        font-family: 'Times New Roman', Times, serif; 
+          
+        }
+        
+        
+        body { background-color:black;
+        }
+        
+        
+        .bdr { 
+          height:500px;
+         width:380px;
+         background-color:black;
+         margin:0 auto; 
+         position:relative; 
+         margin-top:30%;
+         border-radius:20px;
+         text-align:center; 
+         padding-top:20px;
+         color:white; 
+         font-weight:600;
+         font-size:15px;
+         box-shadow: 2px 2px 20px #d0f inset; }
+        
+        h1 { color:#3e0; 
+        margin-top: 5%;
+        }
+        
+        form {
+          padding-top: 20%;
+        
+          
+        }
+        #name {
+          height: 50px; 
+          width:300px;
+          text-align: center;
+          border: none; 
+          border-radius: 25px;
+          font-size: 25px; 
+          box-shadow: -3px 1px 20px 8px rgb(0, 0, 255); 
+          
+        }
+        
+        
+        .btn { 
+          height:50px; 
+          width:150px; 
+          border: none; 
+          border-radius: 25px; 
+          font-size: 30px; 
+          color:black; 
+          font-weight: 600; 
+          box-shadow: -3px 1px 20px 8px rgb(255, 72, 0); 
+          
+        }
+     .img {
+          font-size: 21px;
+          }
+        .inp-img {
+          padding-left: 20%; 
+          font-size: 18px; 
+          color: #3e0; 
+          
+        }
+    </style>
+</head>
+<body>
+    <div class="bdr">
+        <h1>Grab Your Invitation</h1>
+        <form id="infoForm">
+            <input type="text" id="name" name="name" required placeholder="Enter Your Name"><br><br><br><br>
+            <div class="img">
+                <label for="image">Upload your Image:</label> <br><br />
+                <input type="file" id="image" name="image" accept="image/*" required class="inp-img"><br><br><br><br>
+            </div>
+            <input type="submit" value="Submit" class="btn">
+        </form>
+    </div>
+    <script>
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const imageFile = formData.get('image');
+
+            if (imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('image', e.target.result);
+                    window.location.href = 'display.html';
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                alert('Please upload an image.');
+            }
+        });
+    </script>
+</body>
+</html>
